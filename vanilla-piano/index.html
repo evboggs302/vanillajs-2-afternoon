@@ -255,8 +255,19 @@
 
   <script>
     window.addEventListener("keypress", function(event) {
-      var tone = document.querySelector("audio");
-      var key = document.querySelector("polygon");
+      var tone = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+      if (!tone) {
+        return;
+      }
+      var key = document.querySelector(
+        `.pianoKey[data-key='${event.keyCode}']`
+      );
+      tone.currentTime = 0;
+      key.classList.add("pressed");
+      tone.play();
+      setTimeout(function() {
+        key.classList.remove("pressed");
+      }, 200);
     });
   </script>
 </html>
