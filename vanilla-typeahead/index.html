@@ -95,21 +95,21 @@
     console.dir(list);
 
     function render(array) {
-      const html = characters.map(val => `<li>${val.name}</li>`).join("");
+      const html = array.join("");
       list.innerHTML = html;
     }
 
     function filterText() {
       var filtered = characters
-        .filter(function(val) {
-          val.name.toLowerCase().includes(this.value.toLowerCase());
-        })
-        .map(function(val) {
-          `<li>${val.name}</li>`;
-        });
+        .filter(val =>
+          val.name.toLowerCase().includes(this.value.toLowerCase())
+        )
+        .map(val => `<li>${val.name}</li>`);
       if (filtered.length) {
         render(filtered);
       }
     }
+
+    search.addEventListener("keyup", filterText);
   </script>
 </html>
